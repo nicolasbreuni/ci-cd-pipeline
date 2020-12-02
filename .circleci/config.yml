@@ -14,6 +14,9 @@ jobs:
     steps:
       - checkout
       - run: gradle build
+      - store_artifacts:
+          path: ~/repo/build/libs
+          destination: build
 
   test:
     docker:
@@ -41,10 +44,31 @@ jobs:
           path: ~/repo/build/docs
           destination: docs
 
+  docker:
+    machine:
+      image: ubuntu-2004:202010-01
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: docker login -u nb -p d5S2f8UVUin3D9mydxvbJQBAxi2Vr5x9AY8zXwx83F
+      - run: docker build -t docker.nicosystems.de/ci-cd-demo:$CIRCLE_TAG .
+      - run: docker push docker.nicosystems.de/ci-cd-demo:$CIRCLE_TAG
+
 workflows:
   version: 2
   workflow:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: master
       - test
       - docu
+      - docker:
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
