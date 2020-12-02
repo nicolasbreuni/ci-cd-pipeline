@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN gradle build
+RUN ./gradlew bootJar
 
 FROM java:8
 
