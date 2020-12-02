@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - checkout
-      - run: docker login -u nb -p d5S2f8UVUin3D9mydxvbJQBAxi2Vr5x9AY8zXwx83F
+      - run: docker login docker.nicosystems.de -u nb -p d5S2f8UVUin3D9mydxvbJQBAxi2Vr5x9AY8zXwx83F
       - run: docker build -t docker.nicosystems.de/ci-cd-demo:$CIRCLE_TAG .
       - run: docker push docker.nicosystems.de/ci-cd-demo:$CIRCLE_TAG
 
@@ -69,6 +69,6 @@ workflows:
       - docker:
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v.*/
