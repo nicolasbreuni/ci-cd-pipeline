@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle dependencies
+      - run: gradle build
 
   test:
     docker:
@@ -24,6 +24,22 @@ jobs:
     steps:
       - checkout
       - run: gradle test
+      - store_artifacts:
+          path: ~/repo/build/reports/tests
+          destination: test
+
+  docu:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: gradle javadoc
+      - store_artifacts:
+          path: ~/repo/build/docs
+          destination: docs
 
 workflows:
   version: 2
@@ -31,3 +47,4 @@ workflows:
     jobs:
       - build
       - test
+      - docu
