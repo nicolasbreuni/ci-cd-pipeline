@@ -17,6 +17,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+bootJar{
+    archiveFileName = 'ci-cd-demo.jar'
+}
+
 test {
     useJUnitPlatform()
 }
