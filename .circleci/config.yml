@@ -60,10 +60,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore: master
+      - build
       - test
       - docu
       - docker:
