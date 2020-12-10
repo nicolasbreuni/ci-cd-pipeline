@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle build
+      - run: gradle bootJar
       - store_artifacts:
           path: ~/repo/build/libs
           destination: build
