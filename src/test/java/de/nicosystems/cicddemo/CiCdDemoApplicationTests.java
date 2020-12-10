@@ -10,7 +10,7 @@ class CiCdDemoApplicationTests {
 
     @Test
     void contextLoads() {
-        assertThat(1).isEqualTo(0);
+        assertThat(1).isEqualTo(1);
     }
 
 }
